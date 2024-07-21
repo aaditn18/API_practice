@@ -1,8 +1,23 @@
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
+from pymongo import MongoClient
 
 arithmetic_restful_api = Flask(__name__) 
 api = Api(arithmetic_restful_api)
+
+client = MongoClient("mongodb://db:27017")
+db = client.aNewDb              # db init
+userNum = db["userNum"] # collection init
+userNum.insert_one({
+    "Users":0
+})
+
+class Visit(Resource):
+    def get(self):
+        prev = userNum.find({})[0]['Users']
+        userNum.update_one({}, {"$set": {"Users":prev+1}})
+        return str(f"Welcome, user {prev+1}!")
+
 
 class Add(Resource):
     def post(self):
@@ -70,6 +85,7 @@ api.add_resource(Add, "/add")
 api.add_resource(Subtract, "/subtract")
 api.add_resource(Multiply, "/multiply")
 api.add_resource(Divide, "/division")
+api.add_resource(Visit, "/new")
 
 @arithmetic_restful_api.route('/')  
 def hello_world():
