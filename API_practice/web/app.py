@@ -75,7 +75,7 @@ def give_json():
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(host = '0.0.0.0', port=5002)
     # debug = True as parameter during 
     # development to understand error
     # specify host and port during deployment

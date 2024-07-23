@@ -12,6 +12,8 @@ userNum.insert_one({
     "Users":0
 })
 
+# As you can see below, the arithmetic classes only work with post requests, and the visit class work with get requests
+
 class Visit(Resource):
     def get(self):
         prev = userNum.find({})[0]['Users']
@@ -127,4 +129,4 @@ def give_json():
     return jsonify(ret)
 
 if __name__ == "__main__":
-    arithmetic_restful_api.run(host='0.0.0.0')
+    arithmetic_restful_api.run(host='0.0.0.0', port=5001)
