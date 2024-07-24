@@ -125,4 +125,4 @@ api.add_resource(Store, "/store")
 api.add_resource(Retrieve, "/get")
 
 if __name__ == "__main__":
-    sentences_api.run(host='0.0.0.0', port=5000)
+    sentences_api.run(host='0.0.0.0', port=5003)
